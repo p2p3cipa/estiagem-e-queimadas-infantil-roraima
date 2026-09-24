@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cuidado com o Fogo</title>
+<meta name="description" content="Folder digital infantil da CIPA/PMRR: estiagem e queimadas em Roraima. Uma faísca pode virar um incêndio grande.">
+<meta name="theme-color" content="#1B4D2E">
+<meta name="color-scheme" content="light">
+
+<!-- PWA / funcionamento offline -->
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Fogo RR">
+
+<style>
+/* =====================================================================
+   CUIDADO COM O FOGO — folder digital infantil sobre estiagem e queimadas
+   CIPA Monte Roraima / PMRR · identidade verde + branco · sem recursos externos
+   Conteúdo fiel à apresentação infantil "Cuidado com o fogo".
+   ===================================================================== */
+:root{
+  --g0:#0B2E1F; --g1:#1B4D2E; --g2:#2E7D4F; --g3:#2EA76A; --g4:#7CE0A0; --gcl:#E8F6EC;
+  --branco:#FFFFFF; --off:#F5F8F5; --tinta:#0B2E1F; --tinta2:#3D5A48;
+  --fogo:#F26B1D; --fogo-cl:#FFB020; --alerta:#C62F2F; --alerta-cl:#FDECEC;
+  --agua:#3A9AD9; --areia:#E9D3A1;
+  --r:22px;
+  --sombra:0 4px 0 rgba(11,46,31,.07),0 14px 28px -14px rgba(11,46,31,.35);
+  --fonte:ui-rounded,"SF Pro Rounded","Segoe UI Rounded","Segoe UI",system-ui,-apple-system,Roboto,"Helvetica Neue",Arial,sans-serif;
+  --nav-h:66px;
+  color-scheme:light;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:12px;overflow-x:hidden}
+body{margin:0;background:var(--branco);color:var(--tinta);font-family:var(--fonte);font-size:18px;line-height:1.45;overflow-x:hidden;-webkit-tap-highlight-color:transparent}
+main{overflow:hidden}
+svg{display:block;max-width:100%}
+button{font:inherit;color:inherit}
+h1,h2,h3{margin:0;font-weight:900;letter-spacing:-.01em;line-height:1.08}
+p{margin:0}
+:focus-visible{outline:4px solid var(--g0);outline-offset:3px;border-radius:12px}
+.verde-esc :focus-visible{outline-color:#fff}
+.sprite{position:absolute;width:0;height:0;overflow:hidden}
+
+/* ---------- botões ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:58px;padding:14px 26px;border:0;border-radius:999px;background:var(--g1);color:#fff;
+  font-weight:900;font-size:19px;letter-spacing:.01em;cursor:pointer;text-decoration:none;text-align:center;box-shadow:0 5px 0 var(--g0),0 14px 24px -12px rgba(0,0,0,.45);
+  transition:transform .12s,box-shadow .12s;touch-action:manipulation}
+.btn:active{transform:translateY(4px);box-shadow:0 1px 0 var(--g0)}
+.btn.claro{background:#fff;color:var(--g1);box-shadow:0 5px 0 #BFD8C8,0 14px 24px -12px rgba(0,0,0,.3);border:2px solid #CFE3D6}
+.btn.claro:active{box-shadow:0 1px 0 #BFD8C8}
+.btn.vivo{background:var(--g2);box-shadow:0 5px 0 var(--g1),0 14px 24px -12px rgba(0,0,0,.45)}
+.btn.alerta{background:var(--alerta);box-shadow:0 5px 0 #8E1F1F,0 14px 24px -12px rgba(0,0,0,.45)}
+.btn.alerta:active{box-shadow:0 1px 0 #8E1F1F}
+.btn.peq{min-height:50px;font-size:16px;padding:10px 20px}
+.btn.largo{width:100%}
+.btn[disabled]{cursor:default}
+
+/* ---------- seções (branco / verde claro / verde institucional) ---------- */
+.sec{position:relative;padding:60px 16px 72px;background:var(--bg,#fff)}
+.sec.cl{--bg:var(--gcl)}
+.sec.off{--bg:var(--off)}
+.sec.verde-esc{--bg:var(--g1);color:#fff}
+.sec::before,.final::before{content:"";position:absolute;left:0;right:0;top:-25px;height:26px;background:var(--bg,#fff);z-index:1;pointer-events:none;
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 26'%3E%3Cpath d='M0 14C15 14 15 4 30 4S45 14 60 14 75 4 90 4 105 14 120 14V26H0Z'/%3E%3C/svg%3E") repeat-x 0 0/120px 26px;
+          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 26'%3E%3Cpath d='M0 14C15 14 15 4 30 4S45 14 60 14 75 4 90 4 105 14 120 14V26H0Z'/%3E%3C/svg%3E") repeat-x 0 0/120px 26px}
+.in{max-width:560px;margin:0 auto;position:relative;z-index:2}
+.selo{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:999px;background:var(--g1);color:#fff;font-size:13.5px;font-weight:900;letter-spacing:.07em;text-transform:uppercase}
+.verde-esc .selo{background:#fff;color:var(--g1)}
+.selo.fogo{background:var(--fogo);color:#fff}
+.titulo{font-size:clamp(28px,8.2vw,42px);margin:14px 0 12px;color:var(--g0)}
+.verde-esc .titulo{color:#fff}
+.lead{font-size:clamp(18px,4.9vw,21px);color:var(--tinta2);font-weight:600}
+.verde-esc .lead{color:#DDF3E5}
+.destaque{background:linear-gradient(transparent 60%,rgba(124,224,160,.75) 60%);padding:0 3px;border-radius:3px}
+.cartao{background:#fff;border-radius:var(--r);box-shadow:var(--sombra);border:2px solid #DCEDE2}
+.frase{margin-top:20px;background:var(--g1);color:#fff;border-radius:20px;padding:16px;text-align:center;font-size:clamp(19px,5.4vw,23px);font-weight:900}
+.frase.fogo{background:#fff;color:var(--alerta);border:4px solid var(--fogo)}
+
+/* aparecer ao rolar */
+.js .rv{opacity:0;transform:translateY(26px);transition:opacity .6s ease,transform .7s cubic-bezier(.2,.8,.2,1)}
+.js .rv.on{opacity:1;transform:none}
+
+/* animações base */
+.folha{transform-box:fill-box;transform-origin:50% 100%;animation:balanca 3.5s ease-in-out infinite alternate}
+@keyframes balanca{from{transform:rotate(-4deg)}to{transform:rotate(5deg)}}
+.raios{transform-box:fill-box;transform-origin:50% 50%;animation:gira 24s linear infinite}
+@keyframes gira{to{transform:rotate(360deg)}}
+.vento-l{stroke-dasharray:26 90;animation:vento 2.4s linear infinite}
+.sopra{animation:sopra 1.8s ease-in-out infinite alternate}
+@keyframes sopra{from{transform:translateX(-3px)}to{transform:translateX(4px)}}
+@keyframes vento{from{stroke-dashoffset:116}to{stroke-dashoffset:0}}
+.chama{transform-box:fill-box;transform-origin:50% 100%;animation:chama .9s ease-in-out infinite alternate}
+@keyframes chama{from{transform:scale(1,.9) skewX(-3deg)}to{transform:scale(1.04,1.08) skewX(3deg)}}
+.fumaca{animation:fumaca 4s ease-out infinite}
+@keyframes fumaca{0%{transform:translateY(0);opacity:0}20%{opacity:.7}100%{transform:translateY(-40px);opacity:0}}
+.gota-cai{animation:cai 1.2s linear infinite}
+@keyframes cai{from{transform:translateY(-8px);opacity:0}30%{opacity:1}to{transform:translateY(22px);opacity:0}}
+
+/* ---------- progresso e navegação ---------- */
+.prog{position:fixed;left:0;right:0;top:0;height:6px;z-index:40;pointer-events:none;background:rgba(27,77,46,.12)}
+.prog i{position:absolute;left:0;top:0;bottom:0;width:0;background:linear-gradient(90deg,var(--g2),var(--g4));border-radius:0 6px 6px 0}
+.nav{position:fixed;z-index:45;left:50%;bottom:calc(8px + env(safe-area-inset-bottom));transform:translateX(-50%);width:min(calc(100% - 16px),440px);
+  display:grid;grid-template-columns:repeat(5,1fr);gap:2px;padding:5px;background:rgba(255,255,255,.97);border-radius:24px;
+  box-shadow:0 10px 30px -10px rgba(11,46,31,.55),0 0 0 2px rgba(27,77,46,.14);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.nav a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;min-height:50px;border-radius:18px;text-decoration:none;color:var(--tinta2);font-size:11px;font-weight:800;transition:background .2s,color .2s}
+.nav a span{font-size:20px;line-height:1}
+.nav a[aria-current="true"]{background:var(--g1);color:#fff}
+
+/* ---------- CAPA ---------- */
+.capa{position:relative;min-height:min(calc(100vh - var(--nav-h) - 10px),900px);min-height:min(calc(100svh - var(--nav-h) - 10px),900px);display:flex;flex-direction:column;overflow:hidden;
+  background:linear-gradient(180deg,#FFFFFF 0%,#F5F8F5 45%,#E8F6EC 100%)}
+.capa-topo{position:relative;z-index:3;display:flex;padding:calc(14px + env(safe-area-inset-top)) 16px 0}
+.marca{display:flex;align-items:center;gap:8px;background:var(--g1);border-radius:999px;padding:5px 12px 5px 5px;font-size:12.5px;font-weight:900;color:#fff;letter-spacing:.03em}
+.brasao{display:inline-block;width:30px;height:32px;background:url("data:image/png;base64,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") center/contain no-repeat}
+.capa-txt{position:relative;z-index:3;padding:16px 16px 0;text-align:center;max-width:620px;margin:0 auto}
+.capa h1{font-size:clamp(38px,11.4vw,62px);color:var(--g1);line-height:.98}
+.capa .sub{display:inline-flex;align-items:center;gap:6px;margin:14px auto 0;padding:8px 14px;border-radius:14px;background:#fff;border:3px solid var(--fogo);color:#9E3A0B;
+  font-size:clamp(14px,3.9vw,17px);font-weight:900;letter-spacing:.03em;max-width:32ch}
+.capa .chamada{margin:14px auto 0;max-width:31ch;font-size:clamp(17px,4.7vw,20px);font-weight:700;color:var(--tinta2)}
+.capa .acoes{display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:18px}
+.status{display:none;margin-top:2px;font-size:14px;font-weight:800;color:var(--g1);background:#fff;border:2px solid #CFE3D6;padding:6px 12px;border-radius:999px}
+.status.on{display:inline-block}
+.status.esperando{color:#7A5A00}
+.nota-off{font-size:13.5px;font-weight:600;color:var(--tinta2);max-width:34ch;margin:2px auto 0}
+.salvo .capa .nota-off{display:none}
+.capa-cena{position:relative;margin-top:auto;height:clamp(140px,24vh,210px);z-index:2}
+.capa-cena svg{position:absolute;left:0;right:0;bottom:0;width:100%;height:100%}
+
+/* ---------- ESTIAGEM (rio) ---------- */
+.cena-rio{margin-top:18px;overflow:hidden}
+.cena-rio svg{width:100%;height:auto}
+.agua{transform-box:fill-box;transform-origin:50% 50%;transition:transform 1.4s ease-in-out}
+.rio1 .agua{transform:scaleY(.62)}
+.rio2 .agua{transform:scaleY(.28)}
+.bancos{opacity:0;transition:opacity 1s .4s}
+.rio2 .bancos{opacity:1}
+.chuva{transition:opacity .8s}
+.rio1 .chuva,.rio2 .chuva{opacity:0}
+.sol-rio{opacity:0;transition:opacity .8s}
+.rio1 .sol-rio{opacity:.55}
+.rio2 .sol-rio{opacity:1}
+.etapas{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:12px}
+.etapa{min-height:58px;border-radius:14px;border:3px solid #DCEDE2;background:#fff;font-weight:900;font-size:13.5px;cursor:pointer;line-height:1.15;padding:6px 4px;color:var(--tinta2);touch-action:manipulation}
+.etapa span{display:block;font-size:20px}
+.etapa[aria-pressed="true"]{border-color:var(--g2);background:var(--gcl);color:var(--g0)}
+.leg{padding:0 14px 14px;text-align:center;font-weight:800;font-size:17px;min-height:52px}
+
+/* ---------- POR QUE FICA SECO ---------- */
+.epoca{display:inline-block;margin-top:4px;padding:6px 14px;border-radius:999px;background:#fff;border:2px solid var(--g3);color:var(--g1);font-weight:900;font-size:15px}
+.tres{display:grid;gap:12px;margin-top:18px}
+.motivo{display:grid;grid-template-columns:86px 1fr;gap:14px;align-items:center;padding:14px}
+.motivo .ic{width:86px;height:86px;border-radius:22px;display:grid;place-items:center}
+.motivo .ic svg{width:70px;height:70px}
+.motivo b{display:block;font-size:21px;color:var(--g0)}
+.motivo span{display:block;font-size:16.5px;font-weight:600;color:var(--tinta2);margin-top:2px}
+
+/* ---------- DA FAÍSCA AO INCÊNDIO ---------- */
+.cena-fogo{margin-top:18px;overflow:hidden}
+.cena-fogo svg{width:100%;height:auto;background:linear-gradient(180deg,#F5FBF7,#E8F6EC)}
+.passo-fogo{opacity:0;transition:opacity .7s}
+.f0 .p0,.f1 .p0,.f2 .p0,.f3 .p0,.f4 .p0{opacity:1}
+.f1 .p1,.f2 .p1,.f3 .p1,.f4 .p1{opacity:1}
+.f2 .p2,.f3 .p2,.f4 .p2{opacity:1}
+.f3 .p3,.f4 .p3{opacity:1}
+.f4 .p4{opacity:1}
+.tf{color:#2EA76A;transition:color .8s}
+.f1 .tf,.f2 .tf,.f3 .tf,.f4 .tf{color:#C9B45C}
+.trilha-fogo{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;padding:12px 10px 4px}
+.trilha-fogo span{padding:6px 10px;border-radius:999px;background:#F1F5F2;color:#6B7F72;font-weight:900;font-size:12.5px;border:2px solid transparent}
+.trilha-fogo span.on{background:#FFF3E6;color:#9E3A0B;border-color:var(--fogo)}
+.leg-fogo{padding:8px 14px 14px;text-align:center;font-weight:800;font-size:17px;min-height:58px}
+
+/* ---------- O QUE PODE COMEÇAR ---------- */
+.causas{display:grid;gap:12px;margin-top:18px}
+.causa{width:100%;display:grid;grid-template-columns:72px 1fr;gap:4px 14px;align-items:center;text-align:left;padding:14px;cursor:pointer;touch-action:manipulation;border:3px solid #DCEDE2;background:#fff;border-radius:var(--r);box-shadow:var(--sombra)}
+.causa .ic{grid-row:span 2;width:72px;height:72px;border-radius:20px;background:var(--off);display:grid;place-items:center;font-size:40px}
+.causa b{font-size:20px;color:var(--g0)}
+.causa .toque{font-size:13.5px;font-weight:900;color:var(--g2)}
+.causa .perigo{grid-column:1/-1;display:none;margin-top:8px;padding:10px 12px;border-radius:14px;background:#FFF3E6;border-left:6px solid var(--fogo);font-weight:800;font-size:16.5px;color:#6A2A08}
+.causa[aria-expanded="true"]{border-color:var(--fogo)}
+.causa[aria-expanded="true"] .perigo{display:block;animation:abre .4s ease both}
+.causa[aria-expanded="true"] .toque{display:none}
+@keyframes abre{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+
+/* ---------- BRIGADISTAS ---------- */
+.cena-brig{margin-top:18px;border-radius:24px;overflow:hidden;background:#fff}
+.cena-brig svg{width:100%;height:auto}
+.brig-info{display:grid;gap:10px;margin-top:16px}
+.brig-info div{background:rgba(255,255,255,.1);border:2px solid rgba(255,255,255,.28);border-radius:18px;padding:12px 14px;font-weight:800;font-size:17.5px;display:flex;gap:12px;align-items:center}
+.brig-info span{font-size:28px;flex:none}
+.pare{margin-top:18px;background:#fff;color:var(--tinta);border-radius:22px;padding:16px;border:4px solid var(--alerta);text-align:center}
+.pare b{display:block;color:var(--alerta);font-size:clamp(20px,5.8vw,25px);line-height:1.15}
+.pare p{margin-top:8px;font-weight:700;font-size:16.5px;color:var(--tinta2)}
+
+/* ---------- COMO EVITAR ---------- */
+.cuidados{display:grid;gap:12px;margin-top:18px}
+.cuidado{padding:16px;display:grid;grid-template-columns:78px 1fr;gap:14px;align-items:center;border-left:8px solid var(--g3)}
+.cuidado .ic{width:78px;height:78px;border-radius:20px;background:var(--gcl);display:grid;place-items:center}
+.cuidado .ic svg{width:62px;height:62px}
+.cuidado b{display:block;font-size:20px;color:var(--g0);line-height:1.15}
+.cuidado span{display:block;font-size:16.5px;font-weight:600;color:var(--tinta2);margin-top:4px}
+
+/* ---------- JOGO ---------- */
+.pontos{display:flex;justify-content:space-between;align-items:center;font-weight:900;font-size:15px;color:var(--g1);margin-bottom:10px}
+.estrelas{letter-spacing:2px}
+.situ{background:#fff;border-radius:28px;box-shadow:var(--sombra);border:2px solid #DCEDE2;padding:22px 16px;text-align:center}
+.situ .emo{font-size:62px;line-height:1.1}
+.situ .txt{font-size:clamp(20px,5.8vw,24px);font-weight:900;margin-top:8px;min-height:2.6em;display:flex;align-items:center;justify-content:center;color:var(--g0)}
+.escolha{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+.escolha .btn{font-size:16.5px;padding:10px 6px;min-height:66px;flex-direction:column;gap:2px;line-height:1.15}
+.escolha .btn span{font-size:22px}
+.resp{margin-top:14px;border-radius:18px;padding:12px 14px;font-weight:700;font-size:17px;text-align:left}
+.resp.ok{background:#E3F8E9;border:3px solid var(--g3)}
+.resp.quase{background:#FFF7E0;border:3px solid var(--fogo-cl)}
+.resp b{display:block;font-size:19px;margin-bottom:3px}
+
+/* ---------- CIPA ---------- */
+.cena-cipa{margin-top:18px;overflow:hidden}
+.cena-cipa svg{width:100%;height:auto}
+.acoes-cipa{display:grid;gap:10px;margin-top:16px}
+.acoes-cipa div{display:flex;gap:12px;align-items:center;padding:12px 14px;font-weight:800;font-size:17.5px}
+.acoes-cipa span{font-size:28px;flex:none}
+
+/* ---------- MISSÃO ---------- */
+.missoes{display:grid;gap:10px;margin-top:18px}
+.missao{display:flex;align-items:center;gap:14px;width:100%;text-align:left;border:3px solid #DCEDE2;background:#fff;border-radius:20px;padding:14px 16px;cursor:pointer;box-shadow:var(--sombra);
+  min-height:72px;font-weight:800;font-size:17.5px;transition:background .25s,border-color .25s;touch-action:manipulation;color:var(--g0)}
+.missao .emo{font-size:28px;flex:none;width:38px;text-align:center}
+.missao .chk{margin-left:auto;flex:none;width:38px;height:38px;border-radius:12px;border:3px solid #C3D6CA;display:grid;place-items:center;font-size:22px;color:#fff;transition:all .25s}
+.missao[aria-pressed="true"]{background:#EAF8EF;border-color:var(--g3)}
+.missao[aria-pressed="true"] .chk{background:var(--g2);border-color:var(--g2)}
+.missao[aria-pressed="true"] .chk::after{content:"✔"}
+.missao .ok-txt{display:block;font-size:13px;color:var(--g2);font-weight:900;letter-spacing:.04em}
+.barra-missao{height:16px;border-radius:999px;background:#fff;margin-top:18px;overflow:hidden;border:2px solid #DCEDE2}
+.barra-missao i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--g2),var(--g4));transition:width .4s}
+.conta-missao{text-align:center;font-weight:900;margin-top:8px;color:var(--tinta2)}
+.medalha{display:none;margin-top:22px;text-align:center;background:#fff;border:4px solid var(--g3);border-radius:28px;padding:22px 18px;box-shadow:var(--sombra)}
+.medalha.on{display:block;animation:abre .6s ease both}
+.medalha .m{font-size:72px;line-height:1;animation:pulsa 1.8s ease-in-out infinite}
+@keyframes pulsa{50%{transform:scale(1.08)}}
+.medalha h3{font-size:30px;margin-top:8px;color:var(--g1)}
+.medalha p{font-size:19px;font-weight:900;color:var(--g2);margin-top:6px}
+
+/* ---------- QUIZ ---------- */
+.quiz-prog{display:flex;gap:6px;justify-content:center;margin-bottom:12px}
+.quiz-prog i{width:34px;height:10px;border-radius:999px;background:#D6E6DC}
+.quiz-prog i.on{background:var(--g2)}
+.quiz-prog i.feito{background:var(--g4)}
+.perg{background:#fff;border-radius:28px;box-shadow:var(--sombra);border:2px solid #DCEDE2;padding:20px 16px}
+.perg .n{font-size:14px;font-weight:900;color:var(--g2);letter-spacing:.08em;text-align:center}
+.perg h3{font-size:clamp(21px,6vw,26px);text-align:center;margin:8px 0 16px;color:var(--g0)}
+.opcoes{display:grid;gap:10px}
+.opcoes.duplo{grid-template-columns:1fr 1fr}
+.opc{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:64px;border-radius:18px;border:3px solid #D3E4D9;background:var(--off);cursor:pointer;
+  padding:10px 12px;font-weight:900;font-size:17px;flex-wrap:wrap;touch-action:manipulation;color:var(--g0)}
+.opc .emo{font-size:24px}
+.opc .tag{flex-basis:100%;font-size:12px;font-weight:900;text-align:center}
+.opc.certa{border-color:var(--g3);background:#E3F8E9}
+.opc.errada{border-color:var(--fogo-cl);background:#FFF7E0}
+.opc[disabled]{cursor:default}
+.quiz-fim{text-align:center}
+.quiz-fim .grande{font-size:60px;line-height:1.1}
+.quiz-fim h3{font-size:28px;margin:6px 0 8px;color:var(--g1)}
+.quiz-fim .est{font-size:34px;letter-spacing:4px;margin:6px 0}
+
+/* ---------- AJUDA ---------- */
+.ajuda-msgs{display:grid;gap:10px;margin-top:16px}
+.ajuda-msgs div{background:#fff;color:var(--tinta);border-radius:18px;padding:14px 16px;font-weight:900;font-size:19px;display:flex;gap:12px;align-items:center}
+.ajuda-msgs span{font-size:28px;flex:none}
+.cartao-190{margin-top:18px;text-align:center;background:#fff;color:var(--tinta);border:4px solid var(--alerta);border-radius:28px;padding:22px 16px}
+.cartao-190 .rotulo{font-size:15px;font-weight:900;letter-spacing:.1em;color:var(--alerta)}
+.cartao-190 .num190{font-size:clamp(72px,24vw,104px);font-weight:900;line-height:1;color:var(--g0)}
+.cartao-190 p{font-weight:700;color:var(--tinta2);margin:6px 0 16px;font-size:16px}
+.cartao-190 .obs{font-size:14.5px;margin:14px 0 0}
+
+/* ---------- ENCERRAMENTO ---------- */
+.final{--bg:#E8F6EC;position:relative;overflow:hidden;background:linear-gradient(180deg,#E8F6EC 0,#F5F8F5 200px,#2E7D4F 201px,#1B4D2E 100%);padding:52px 16px calc(var(--nav-h) + 40px + env(safe-area-inset-bottom));color:#fff}
+.final-cena{position:relative;max-width:560px;margin:0 auto;height:230px}
+.final-cena svg{position:absolute;inset:0;width:100%;height:100%}
+.final-txt{position:relative;z-index:2;max-width:560px;margin:14px auto 0;text-align:center}
+.final-txt h2{font-size:clamp(30px,8.8vw,46px)}
+.lista-final{display:grid;gap:8px;margin:16px auto 0;max-width:420px;text-align:left}
+.lista-final li{list-style:none;background:rgba(255,255,255,.12);border:2px solid rgba(255,255,255,.25);border-radius:16px;padding:10px 14px;font-weight:800;font-size:17.5px}
+.lista-final{padding:0}
+.assina{margin:22px auto 0;display:flex;align-items:center;justify-content:center;gap:12px;background:#fff;color:var(--tinta);border-radius:22px;padding:12px 16px;max-width:420px;text-align:left}
+.assina .brasao{width:48px;height:52px;flex:none}
+.assina b{display:block;font-size:16px;letter-spacing:.05em;color:var(--g1)}
+.assina span{display:block;font-size:14px;font-weight:700;color:var(--tinta2)}
+.lema{margin-top:16px;font-size:17.5px;font-weight:800;font-style:italic;color:var(--g4)}
+.final-acoes{display:grid;gap:12px;margin:24px auto 0;max-width:400px}
+.final-acoes .btn{font-size:17px}
+.final-acoes .nota-off{color:#DDF3E5}
+.final-acoes .status{justify-self:center}
+.creditos{margin-top:24px;font-size:12.5px;color:#CDE9D6;font-weight:600;line-height:1.5}
+
+/* ---------- festa, aviso e folha ---------- */
+.festa{position:fixed;inset:0;pointer-events:none;z-index:60;overflow:hidden}
+.festa i{position:absolute;bottom:-40px;font-style:normal;animation:festa 2.6s cubic-bezier(.2,.6,.3,1) forwards}
+@keyframes festa{0%{transform:translate(0,0) scale(.6);opacity:1}100%{transform:translate(var(--dx),-105vh) scale(1.1) rotate(var(--r));opacity:.2}}
+.toast{position:fixed;left:50%;bottom:calc(var(--nav-h) + 22px + env(safe-area-inset-bottom));transform:translate(-50%,20px);background:var(--g0);color:#fff;padding:12px 18px;border-radius:14px;
+  font-weight:800;font-size:15px;opacity:0;pointer-events:none;transition:all .25s;z-index:70;max-width:calc(100% - 32px);text-align:center}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.sheet{position:fixed;inset:0;z-index:80;background:rgba(11,46,31,.6);display:none;align-items:flex-end;justify-content:center}
+.sheet.show{display:flex}
+.sheet-box{width:100%;max-width:480px;background:#fff;border-radius:28px 28px 0 0;padding:22px 20px calc(24px + env(safe-area-inset-bottom));animation:sobeSheet .35s ease both}
+@keyframes sobeSheet{from{transform:translateY(100%)}to{transform:none}}
+.sheet-box .ic{width:64px;height:64px;margin:0 auto 8px}
+.sheet-box h3{font-size:24px;text-align:center;color:var(--g1)}
+.sheet-box .sub{text-align:center;color:var(--tinta2);font-weight:700;margin:6px 0 14px;font-size:16px}
+.sheet-box ol{list-style:none;padding:0;margin:0 0 18px;display:grid;gap:10px}
+.sheet-box li{display:flex;gap:12px;align-items:center;background:var(--gcl);border-radius:16px;padding:12px 14px;font-weight:700;font-size:17px}
+.sheet-box li b{flex:none;width:36px;height:36px;border-radius:12px;background:var(--g1);color:#fff;display:grid;place-items:center}
+
+@media (min-width:640px){ .sec{padding:80px 24px 92px} }
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;transition-delay:0s!important}
+  .js .rv{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ===================== ILUSTRAÇÕES ORIGINAIS (sprite SVG) ===================== -->
+<svg class="sprite" aria-hidden="true" focusable="false">
+  <defs>
+    <!-- Buriti (palmeira do lavrado) -->
+    <symbol id="buriti" viewBox="0 0 80 140">
+      <path d="M38 140Q36 90 40 50" stroke="#7A5A3A" stroke-width="7" fill="none" stroke-linecap="round"/>
+      <g class="folha" fill="#2E7D4F">
+        <path d="M40 50Q10 30 2 44Q20 40 40 52Z"/><path d="M40 50Q70 30 78 44Q60 40 40 52Z"/>
+        <path d="M40 50Q20 14 6 18Q26 26 40 52Z"/><path d="M40 50Q60 14 74 18Q54 26 40 52Z"/>
+        <path d="M40 50Q40 8 34 2Q36 26 40 52Z" fill="#2EA76A"/><path d="M40 50Q44 10 52 4Q44 28 40 52Z" fill="#2EA76A"/>
+      </g>
+    </symbol>
+    <!-- Árvore -->
+    <symbol id="arvore" viewBox="0 0 100 140">
+      <rect x="44" y="80" width="12" height="60" rx="5" fill="#7A5A3A"/>
+      <g class="folha"><circle cx="50" cy="56" r="38" fill="#2E7D4F"/><circle cx="30" cy="70" r="22" fill="#1B4D2E"/><circle cx="72" cy="68" r="22" fill="#2EA76A"/></g>
+    </symbol>
+    <!-- Tufo de mato -->
+    <symbol id="tufo" viewBox="0 0 40 30"><path d="M2 30Q6 12 10 30Q12 6 18 30Q20 2 24 30Q28 8 30 30Q34 14 38 30Z" fill="currentColor"/></symbol>
+    <!-- Chama (alerta) -->
+    <symbol id="chama" viewBox="0 0 40 56">
+      <path d="M20 2C26 14 36 20 36 34C36 46 28 54 20 54C12 54 4 46 4 34C4 24 12 20 14 10C16 18 20 20 20 2Z" fill="#F26B1D"/>
+      <path d="M20 24C24 30 28 34 28 40C28 48 24 52 20 52C16 52 12 48 12 42C12 36 18 34 20 24Z" fill="#FFB020"/>
+    </symbol>
+    <!-- Gota, sol, vento -->
+    <symbol id="i-gota" viewBox="0 0 70 70"><path d="M35 6C46 24 56 34 56 46A21 21 0 0 1 14 46C14 34 24 24 35 6Z" fill="#3A9AD9"/><path d="M26 44Q26 54 36 56" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/><path d="M8 62H62" stroke="#C9B45C" stroke-width="5" stroke-linecap="round" stroke-dasharray="8 7"/></symbol>
+    <symbol id="i-sol" viewBox="0 0 70 70"><g class="raios" stroke="#FFB020" stroke-width="5" stroke-linecap="round"><path d="M35 3V12M35 58V67M3 35H12M58 35H67M12 12L18 18M52 52L58 58M58 12L52 18M18 52L12 58"/></g><circle cx="35" cy="35" r="16" fill="#FFB020"/></symbol>
+    <symbol id="i-vento" viewBox="0 0 70 70"><g class="sopra" fill="none" stroke="#2E7D4F" stroke-width="5" stroke-linecap="round"><path d="M6 24H44A9 9 0 1 0 36 13"/><path d="M6 38H54A9 9 0 1 1 46 49"/><path d="M6 52H30"/></g><g fill="#C9B45C"><path d="M50 56Q58 50 64 56Q58 60 50 56Z"/><path d="M40 64Q46 58 52 62Q46 66 40 64Z"/></g></symbol>
+    <!-- Balão, bituca, fogueira -->
+    <symbol id="i-balao" viewBox="0 0 70 70"><path d="M35 4C50 4 58 16 56 28C54 40 44 46 42 52H28C26 46 16 40 14 28C12 16 20 4 35 4Z" fill="#fff" stroke="#1B4D2E" stroke-width="4"/><path d="M28 52H42V58H28Z" fill="#7A5A3A"/><use href="#chama" x="29" y="56" width="12" height="14"/><path d="M8 66L62 8" stroke="#C62F2F" stroke-width="6" stroke-linecap="round"/></symbol>
+    <symbol id="i-lixo" viewBox="0 0 70 70"><path d="M16 22H54L50 64H20Z" fill="#2E7D4F"/><rect x="12" y="14" width="46" height="8" rx="3" fill="#1B4D2E"/><path d="M29 14V9H41V14" fill="none" stroke="#1B4D2E" stroke-width="4"/><path d="M28 32V56M42 32V56" stroke="#7CE0A0" stroke-width="4" stroke-linecap="round"/><rect x="36" y="4" width="22" height="6" rx="3" fill="#fff" stroke="#8A8A8A" stroke-width="2" transform="rotate(20 47 7)"/></symbol>
+    <symbol id="i-fogueira" viewBox="0 0 70 70"><path d="M10 62L60 48M10 48L60 62" stroke="#7A5A3A" stroke-width="7" stroke-linecap="round"/><g class="chama"><use href="#chama" x="22" y="10" width="26" height="40"/></g><path d="M4 36Q10 30 16 36" fill="none" stroke="#3A9AD9" stroke-width="4" stroke-linecap="round"/></symbol>
+    <!-- Brigadista -->
+    <symbol id="brigadista" viewBox="0 0 100 190">
+      <rect x="32" y="120" width="15" height="60" rx="7" fill="#1B4D2E"/><rect x="53" y="120" width="15" height="60" rx="7" fill="#1B4D2E"/>
+      <ellipse cx="38" cy="182" rx="13" ry="6" fill="#0B2E1F"/><ellipse cx="62" cy="182" rx="13" ry="6" fill="#0B2E1F"/>
+      <path d="M26 64Q50 54 74 64L76 126H24Z" fill="#2E7D4F"/>
+      <path d="M26 96H74M26 108H74" stroke="#FFD66B" stroke-width="5"/>
+      <path d="M26 68L14 114M74 68L84 100" stroke="#2E7D4F" stroke-width="12" stroke-linecap="round"/>
+      <circle cx="14" cy="116" r="6" fill="#C98B5E"/><circle cx="84" cy="102" r="6" fill="#C98B5E"/>
+      <path d="M84 102L96 20" stroke="#7A5A3A" stroke-width="5" stroke-linecap="round"/><rect x="86" y="8" width="16" height="20" rx="3" fill="#2F3B35" transform="rotate(8 94 18)"/>
+      <circle cx="50" cy="38" r="22" fill="#C98B5E"/>
+      <path d="M24 34Q26 10 50 10Q74 10 76 34Z" fill="#FFD66B"/><path d="M20 34H80" stroke="#E0A800" stroke-width="6" stroke-linecap="round"/>
+      <circle cx="42" cy="40" r="3" fill="#0B2E1F"/><circle cx="58" cy="40" r="3" fill="#0B2E1F"/>
+      <path d="M43 50Q50 55 57 50" fill="none" stroke="#6B3A2A" stroke-width="2.6" stroke-linecap="round"/>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="prog" aria-hidden="true"><i id="progFill"></i></div>
+
+<main>
+
+<!-- ===================== 1. CUIDADO COM O FOGO (capa) ===================== -->
+<header class="capa" id="inicio" data-nav="inicio">
+  <div class="capa-topo">
+    <div class="marca"><span class="brasao" role="img" aria-label="Brasão da CIPA Monte Roraima"></span>CIPA · PMRR · Roraima</div>
+  </div>
+  <div class="capa-txt">
+    <h1>Cuidado com o fogo</h1>
+    <p class="sub"><span aria-hidden="true">🔥</span> Uma faísca pode virar um incêndio grande</p>
+    <p class="chamada">Vamos descobrir por que Roraima fica tão seca em certas épocas do ano e como ajudar a evitar queimadas.</p>
+    <div class="acoes">
+      <a class="btn" href="#estiagem">🔥 COMEÇAR</a>
+      <button class="btn claro peq js-instalar" type="button">📲 SALVAR PARA USAR OFFLINE</button>
+      <span class="status js-status" role="status" aria-live="polite"></span>
+      <p class="nota-off">Abra uma vez com internet. Depois você poderá consultar offline.</p>
+    </div>
+  </div>
+  <div class="capa-cena" aria-hidden="true">
+    <svg viewBox="0 0 400 200" preserveAspectRatio="xMidYMax slice">
+      <path d="M0 110L34 102L56 58L70 52H180L194 60L212 98L250 102L278 80L292 74H344L356 82L374 102L400 104V200H0Z" fill="#CDE9D6"/>
+      <path d="M56 58L70 52H180L194 60L188 68H62Z" fill="#E8F6EC"/>
+      <path d="M0 150Q100 118 200 144T400 140V200H0Z" fill="#7CE0A0"/>
+      <path d="M0 172Q120 150 240 168T400 164V200H0Z" fill="#2EA76A"/>
+      <use href="#buriti" x="22" y="70" width="60" height="105"/>
+      <use href="#buriti" x="318" y="62" width="64" height="112"/>
+      <use href="#arvore" x="250" y="112" width="50" height="70"/>
+      <use class="tf" href="#tufo" x="130" y="160" width="36" height="26"/><use class="tf" href="#tufo" x="200" y="164" width="30" height="22"/>
+    </svg>
+  </div>
+</header>
+
+<!-- ===================== 2. A ESTIAGEM — QUANDO O RIO FICA BAIXINHO ===================== -->
+<section class="sec" id="estiagem" data-nav="estiagem" aria-labelledby="t-est">
+  <div class="in">
+    <span class="selo rv">💧 A estiagem</span>
+    <h2 class="titulo rv" id="t-est">O que acontece quando a chuva diminui?</h2>
+    <p class="lead rv">Estiagem é uma época do ano em que chove bem pouco. Na estiagem, o rio fica <b>bem baixinho</b>.</p>
+    <div class="cena-rio cartao rv" id="cenaRio">
+      <svg viewBox="0 0 360 200" role="img" aria-labelledby="rioTit">
+        <title id="rioTit">Um rio visto de cima. Com a estiagem, a água baixa e aparecem praias de areia.</title>
+        <rect width="360" height="200" fill="#F5F8F5"/>
+        <rect width="360" height="60" fill="#E4F2FB"/>
+        <g class="chuva"><ellipse cx="90" cy="24" rx="40" ry="14" fill="#B9D6EA"/><ellipse cx="116" cy="20" rx="26" ry="12" fill="#CFE3F1"/>
+          <g stroke="#3A9AD9" stroke-width="3" stroke-linecap="round"><path class="gota-cai" d="M70 42V48"/><path class="gota-cai" d="M92 44V50" style="animation-delay:-.4s"/><path class="gota-cai" d="M114 42V48" style="animation-delay:-.8s"/></g></g>
+        <g class="sol-rio"><use href="#i-sol" x="270" y="2" width="56" height="56"/></g>
+        <rect y="60" width="360" height="140" fill="#7CE0A0"/>
+        <use href="#buriti" x="8" y="40" width="44" height="78"/><use href="#arvore" x="300" y="44" width="50" height="70"/>
+        <path d="M0 96Q90 84 180 98T360 94V172Q270 184 180 170T0 176Z" fill="#E9D3A1"/>
+        <g class="agua"><path d="M0 96Q90 84 180 98T360 94V172Q270 184 180 170T0 176Z" fill="#3A9AD9"/>
+          <path d="M30 120Q50 114 70 120M150 140Q170 134 190 140M250 118Q270 112 290 118" fill="none" stroke="#B9E0F7" stroke-width="3" stroke-linecap="round"/></g>
+        <g class="bancos" fill="#F0DDB0" stroke="#D4B97A" stroke-width="2"><ellipse cx="80" cy="112" rx="46" ry="9"/><ellipse cx="250" cy="156" rx="54" ry="9"/><ellipse cx="190" cy="108" rx="30" ry="6"/></g>
+      </svg>
+      <div class="etapas" role="group" aria-label="Etapas da estiagem">
+        <button class="etapa" type="button" data-e="0" aria-pressed="true"><span aria-hidden="true">🌧️</span>Rio cheio</button>
+        <button class="etapa" type="button" data-e="1" aria-pressed="false"><span aria-hidden="true">⬇️</span>Água baixando</button>
+        <button class="etapa" type="button" data-e="2" aria-pressed="false"><span aria-hidden="true">🏖️</span>Areia aparecendo</button>
+      </div>
+      <p class="leg" id="legRio" aria-live="polite">Com chuva, o rio fica cheio de água.</p>
+    </div>
+    <button class="btn vivo largo rv" id="btnRio" type="button" style="margin-top:14px">▶ VER A ESTIAGEM ACONTECER</button>
+    <p class="frase rv">O rio baixa tanto que até aparecem praias de areia onde antes só tinha água!</p>
+  </div>
+</section>
+
+<!-- ===================== 3. POR QUE RORAIMA FICA TÃO SECA ===================== -->
+<section class="sec cl" id="seco" data-nav="estiagem" aria-labelledby="t-seco">
+  <div class="in">
+    <span class="selo rv">☀️ Por que acontece</span>
+    <h2 class="titulo rv" id="t-seco">Por que Roraima fica tão seca?</h2>
+    <span class="epoca rv">📅 De dezembro a abril, mais ou menos</span>
+    <p class="lead rv" style="margin-top:12px">Três coisas deixam tudo bem seco:</p>
+    <div class="tres">
+      <div class="motivo cartao rv"><div class="ic" style="background:#E4F2FB"><svg viewBox="0 0 70 70" aria-hidden="true"><use href="#i-gota"/></svg></div><div><b>💧 Chove bem pouco</b><span>Nessa época do ano, as chuvas quase somem em Roraima.</span></div></div>
+      <div class="motivo cartao rv"><div class="ic" style="background:#FFF6E0"><svg viewBox="0 0 70 70" aria-hidden="true"><use href="#i-sol"/></svg></div><div><b>☀️ O sol fica bem forte</b><span>Os dias ficam quentes e o calor seca a terra e as plantas.</span></div></div>
+      <div class="motivo cartao rv"><div class="ic" style="background:var(--gcl)"><svg viewBox="0 0 70 70" aria-hidden="true"><use href="#i-vento"/></svg></div><div><b>💨 O vento seca tudo</b><span>O vento seco deixa o mato quebradiço, fácil de pegar fogo.</span></div></div>
+    </div>
+    <p class="frase rv">Com tudo tão seco, qualquer faísca pode virar um incêndio grande.</p>
+  </div>
+</section>
+
+<!-- ===================== 4. UMA FAÍSCA PEQUENA PODE VIRAR UM INCÊNDIO ENORME ===================== -->
+<section class="sec" id="faisca" data-nav="fogo" aria-labelledby="t-fai">
+  <div class="in">
+    <span class="selo fogo rv">⚠️ Fique atento</span>
+    <h2 class="titulo rv" id="t-fai">Uma faísca pequena pode virar um incêndio enorme</h2>
+    <p class="lead rv">Na época seca, o mato vira um “palito de fósforo”: qualquer faísca pega fogo rápido, e o vento espalha o fogo antes que alguém consiga apagar.</p>
+    <div class="cena-fogo cartao rv" id="cenaFogo">
+      <svg viewBox="0 0 360 190" role="img" aria-labelledby="fogoTit">
+        <title id="fogoTit">Passo a passo: uma faísca cai no mato seco, vira chama, o vento sopra e o fogo se espalha.</title>
+        <rect y="140" width="360" height="50" fill="#D8ECD0"/>
+        <use href="#arvore" x="290" y="54" width="60" height="90"/>
+        <g><use class="tf" href="#tufo" x="20" y="116" width="40" height="30"/><use class="tf" href="#tufo" x="80" y="118" width="36" height="28"/><use class="tf" href="#tufo" x="140" y="116" width="40" height="30"/><use class="tf" href="#tufo" x="200" y="118" width="36" height="28"/><use class="tf" href="#tufo" x="250" y="116" width="40" height="30"/></g>
+        <g class="passo-fogo p0"><path d="M40 96L44 104L52 106L44 108L40 116L36 108L28 106L36 104Z" fill="#FFB020"/><circle cx="40" cy="106" r="3" fill="#F26B1D"/><text x="24" y="86" font-size="13" font-weight="900" fill="#9E3A0B" font-family="system-ui,sans-serif">faísca!</text></g>
+        <g class="passo-fogo p2"><g class="chama"><use href="#chama" x="26" y="92" width="30" height="42"/></g></g>
+        <g class="passo-fogo p3" fill="none" stroke="#2E7D4F" stroke-width="4" stroke-linecap="round"><path class="vento-l" d="M10 60H120"/><path class="vento-l" d="M30 74H150" style="animation-delay:-.7s"/><path class="vento-l" d="M0 46H90" style="animation-delay:-1.3s"/><text x="120" y="50" font-size="13" font-weight="900" fill="#2E7D4F" stroke="none" font-family="system-ui,sans-serif">vento 💨</text></g>
+        <g class="passo-fogo p4"><g class="chama"><use href="#chama" x="84" y="96" width="28" height="38"/></g><g class="chama" style="animation-delay:-.3s"><use href="#chama" x="144" y="92" width="32" height="44"/></g><g class="chama" style="animation-delay:-.6s"><use href="#chama" x="202" y="98" width="26" height="36"/></g>
+          <g fill="#B8C2BC"><circle class="fumaca" cx="100" cy="84" r="9"/><circle class="fumaca" cx="160" cy="78" r="11" style="animation-delay:-1.3s"/><circle class="fumaca" cx="214" cy="86" r="8" style="animation-delay:-2.4s"/></g></g>
+      </svg>
+      <div class="trilha-fogo" id="trilhaFogo" aria-hidden="true"><span class="on">✨ Faísca</span><span>🌾 Mato seco</span><span>🔥 Chama</span><span>💨 Vento</span><span>🔥🔥 Fogo se espalhando</span></div>
+      <p class="leg-fogo" id="legFogo" aria-live="polite">Uma faísca pequena cai no mato…</p>
+    </div>
+    <button class="btn vivo largo rv" id="btnFogo" type="button" style="margin-top:14px">▶ E DEPOIS?</button>
+  </div>
+</section>
+
+<!-- ===================== 4b. O QUE PODE COMEÇAR UM INCÊNDIO ===================== -->
+<section class="sec cl" id="causas" data-nav="fogo" aria-labelledby="t-cau">
+  <div class="in">
+    <span class="selo rv">🔎 Descubra</span>
+    <h2 class="titulo rv" id="t-cau">O que pode começar um incêndio?</h2>
+    <p class="lead rv">Na época seca, estas coisas podem começar um incêndio que se espalha rápido e é difícil de parar.</p>
+    <div class="causas" id="listaCausas"></div>
+  </div>
+</section>
+
+<!-- ===================== 5. OS BRIGADISTAS CUIDAM DA NOSSA MATA ===================== -->
+<section class="sec verde-esc" id="brigadistas" data-nav="fogo" aria-labelledby="t-brig">
+  <div class="in">
+    <span class="selo rv">🦺 Trabalho de herói</span>
+    <h2 class="titulo rv" id="t-brig">Os brigadistas cuidam da nossa mata</h2>
+    <div class="cena-brig rv">
+      <svg viewBox="0 0 360 200" role="img" aria-labelledby="brigTit">
+        <title id="brigTit">Dois brigadistas com capacete e equipamento especial protegem a mata.</title>
+        <rect width="360" height="200" fill="#F5F8F5"/><rect y="160" width="360" height="40" fill="#7CE0A0"/>
+        <use href="#buriti" x="6" y="60" width="54" height="100"/><use href="#arvore" x="296" y="70" width="60" height="92"/>
+        <use href="#brigadista" x="96" y="18" width="84" height="160"/>
+        <use href="#brigadista" x="176" y="24" width="80" height="152"/>
+        <g class="chama" style="opacity:.85"><use href="#chama" x="262" y="136" width="18" height="26"/></g>
+      </svg>
+    </div>
+    <div class="brig-info">
+      <div class="rv"><span aria-hidden="true">🌳</span><p>Os brigadistas enfrentam o fogo para proteger a nossa natureza.</p></div>
+      <div class="rv"><span aria-hidden="true">🦺</span><p>Eles são treinados e usam equipamentos especiais.</p></div>
+    </div>
+    <div class="pare rv">
+      <b>🚫 NÃO TENTE APAGAR UM INCÊNDIO SOZINHO.</b>
+      <p>Esse trabalho é só para profissionais treinados e com equipamento especial — nunca de criança, nem de adulto sem preparo.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 6. COMO EVITAR UM INCÊNDIO ===================== -->
+<section class="sec" id="evitar" data-nav="prevencao" aria-labelledby="t-evi">
+  <div class="in">
+    <span class="selo rv">🛡️ Como ajudar</span>
+    <h2 class="titulo rv" id="t-evi">Como evitar um incêndio</h2>
+    <p class="lead rv">Três cuidados importantes:</p>
+    <div class="cuidados">
+      <div class="cuidado cartao rv"><div class="ic"><svg viewBox="0 0 70 70" aria-hidden="true"><use href="#i-balao"/></svg></div><div><b>🎈 Nunca solte balão</b><span>Ele pode cair aceso em cima do mato seco e começar um incêndio.</span></div></div>
+      <div class="cuidado cartao rv"><div class="ic"><svg viewBox="0 0 70 70" aria-hidden="true"><use href="#i-lixo"/></svg></div><div><b>🚬 Bituca de cigarro no lixo, nunca no chão</b><span>Jogada no chão, ela pode ficar acesa e incendiar o mato seco.</span></div></div>
+      <div class="cuidado cartao rv"><div class="ic"><svg viewBox="0 0 70 70" aria-hidden="true"><use href="#i-fogueira"/></svg></div><div><b>🔥 Fogueira e churrasco com cuidado</b><span>Sempre com um adulto, longe do mato seco, e apagados por completo depois.</span></div></div>
+    </div>
+    <p class="frase rv">Pequenas atitudes evitam grandes incêndios.</p>
+  </div>
+</section>
+
+<!-- ===================== JOGO: CERTO OU PERIGOSO ===================== -->
+<section class="sec cl" id="jogo" data-nav="prevencao" aria-labelledby="t-jogo">
+  <div class="in">
+    <span class="selo rv">🎮 Jogo</span>
+    <h2 class="titulo rv" id="t-jogo">Certo ou perigoso?</h2>
+    <p class="lead rv">Leia a situação e escolha a resposta.</p>
+    <div class="rv" id="jogoBox" aria-live="polite" style="margin-top:18px"></div>
+  </div>
+</section>
+
+<!-- ===================== 7. A CIPA ESPALHA A MENSAGEM ===================== -->
+<section class="sec" id="cipa" data-nav="prevencao" aria-labelledby="t-cipa">
+  <div class="in">
+    <span class="selo rv">📣 A CIPA na rua</span>
+    <h2 class="titulo rv" id="t-cipa">A CIPA espalha a mensagem</h2>
+    <p class="lead rv">Prevenção também é trabalho da CIPA.</p>
+    <div class="cena-cipa cartao rv">
+      <svg viewBox="0 0 360 200" role="img" aria-labelledby="placaTit">
+        <title id="placaTit">Uma placa educativa no lavrado com a mensagem: cuidado com o fogo.</title>
+        <rect width="360" height="200" fill="#F5F8F5"/><path d="M0 150Q120 128 240 146T360 140V200H0Z" fill="#7CE0A0"/>
+        <use href="#buriti" x="10" y="54" width="56" height="104"/><use href="#buriti" x="296" y="60" width="54" height="100"/>
+        <rect x="170" y="96" width="12" height="70" fill="#7A5A3A"/>
+        <rect x="96" y="30" width="160" height="80" rx="12" fill="#1B4D2E" stroke="#0B2E1F" stroke-width="3"/>
+        <text x="176" y="58" text-anchor="middle" font-size="15" font-weight="900" fill="#fff" font-family="system-ui,sans-serif">CUIDADO COM</text>
+        <text x="176" y="80" text-anchor="middle" font-size="15" font-weight="900" fill="#fff" font-family="system-ui,sans-serif">O FOGO!</text>
+        <use href="#chama" x="226" y="66" width="18" height="26"/>
+        <text x="176" y="100" text-anchor="middle" font-size="10" font-weight="800" fill="#7CE0A0" font-family="system-ui,sans-serif">CIPA · PMRR</text>
+      </svg>
+    </div>
+    <div class="acoes-cipa">
+      <div class="cartao rv"><span aria-hidden="true">🪧</span><p>A CIPA espalha placas educativas.</p></div>
+      <div class="cartao rv"><span aria-hidden="true">🗣️</span><p>Conversa com a comunidade para evitar incêndios.</p></div>
+    </div>
+    <p class="frase rv">Prevenir também é proteger.</p>
+  </div>
+</section>
+
+<!-- ===================== MISSÃO CONTRA O FOGO ===================== -->
+<section class="sec cl" id="missao" data-nav="prevencao" aria-labelledby="t-mis">
+  <div class="in">
+    <span class="selo rv">🏅 Sua missão</span>
+    <h2 class="titulo rv" id="t-mis">Missão contra o fogo</h2>
+    <p class="lead rv">Toque em cada item para aceitar a missão.</p>
+    <div class="missoes" id="missoes"></div>
+    <div class="barra-missao" aria-hidden="true"><i id="barraMissao"></i></div>
+    <p class="conta-missao" id="contaMissao" aria-live="polite">0 de 6 missões</p>
+    <div class="medalha" id="medalha">
+      <div class="m" aria-hidden="true">🏅</div>
+      <h3>MISSÃO CUMPRIDA!</h3>
+      <p>VOCÊ AJUDA A PROTEGER RORAIMA!</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== QUIZ ===================== -->
+<section class="sec" id="quiz" data-nav="quiz" aria-labelledby="t-quiz">
+  <div class="in">
+    <span class="selo rv">🧠 Quiz</span>
+    <h2 class="titulo rv" id="t-quiz">Vamos ver o que você aprendeu?</h2>
+    <div class="rv" style="margin-top:18px">
+      <div class="quiz-prog" id="quizProg" aria-hidden="true"></div>
+      <div id="quizBox" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 8. COMO AVISAR A CIPA ===================== -->
+<section class="sec verde-esc" id="ajuda" data-nav="quiz" aria-labelledby="t-aj">
+  <div class="in">
+    <span class="selo rv">🆘 Guarde este número</span>
+    <h2 class="titulo rv" id="t-aj">Viu fumaça ou fogo?</h2>
+    <div class="ajuda-msgs">
+      <div class="rv"><span aria-hidden="true">🚫</span><p>NÃO tente apagar sozinho.</p></div>
+      <div class="rv"><span aria-hidden="true">🗣️</span><p>Avise um adulto.</p></div>
+    </div>
+    <div class="cartao-190 rv">
+      <p style="margin:0 0 10px;font-size:17px;color:var(--g0)">Viu fumaça ou fogo no mato? Peça para um adulto ligar:</p>
+      <div class="rotulo">POLÍCIA MILITAR / CIPA</div>
+      <div class="num190" aria-label="cento e noventa">190</div>
+      <a class="btn alerta largo" href="tel:190">📞 LIGAR 190</a>
+      <p class="obs">A pessoa que atender vai perguntar onde é e o que você viu. É só contar com calma.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 9. SEJA UM GUARDIÃO CONTRA O FOGO ===================== -->
+<footer class="final" id="final" data-nav="quiz">
+  <div class="final-cena" aria-hidden="true">
+    <svg viewBox="0 0 360 230" preserveAspectRatio="xMidYMax meet">
+      <path d="M0 150L30 142L52 104L66 98H170L184 106L202 138L240 142L268 122L282 116H334L346 124L364 142V230H0Z" fill="#CDE9D6"/>
+      <use href="#buriti" x="10" y="80" width="64" height="116"/><use href="#buriti" x="286" y="70" width="70" height="126"/>
+      <use href="#arvore" x="96" y="110" width="66" height="96"/><use href="#arvore" x="200" y="104" width="72" height="104"/>
+      <circle cx="176" cy="44" r="24" fill="#fff"/><path d="M164 44L173 53L190 36" fill="none" stroke="#2EA76A" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+      <rect y="196" width="360" height="34" fill="#2E7D4F"/>
+    </svg>
+  </div>
+  <div class="final-txt">
+    <h2>Seja um guardião contra o fogo!</h2>
+    <ul class="lista-final">
+      <li>🌿 Todo mundo pode ajudar a evitar incêndios.</li>
+      <li>🔥 Tenha cuidado com o fogo.</li>
+      <li>🗣️ Avise os adultos.</li>
+      <li>🌳 Cuide da natureza.</li>
+      <li>📞 Se precisar, lembre-se: 190.</li>
+    </ul>
+    <div class="assina">
+      <span class="brasao" role="img" aria-label="Brasão da CIPA Monte Roraima"></span>
+      <div><b>CIPA MONTE RORAIMA / PMRR</b><span>Companhia Independente de Policiamento Ambiental · Polícia Militar de Roraima</span></div>
+    </div>
+    <p class="lema">“Cuidando de Roraima, um cuidado de cada vez.”</p>
+    <div class="final-acoes">
+      <button class="btn claro" id="share" type="button">📤 COMPARTILHAR</button>
+      <button class="btn claro js-instalar" type="button">📲 SALVAR PARA USAR OFFLINE</button>
+      <span class="status js-status" role="status" aria-live="polite"></span>
+      <p class="nota-off">Abra uma vez com internet. Depois você poderá consultar offline.</p>
+      <a class="btn peq" href="#inicio" style="background:var(--g0)">⬆ VOLTAR AO INÍCIO</a>
+    </div>
+    <p class="creditos">Ilustrações originais criadas para este material. Conteúdo da apresentação infantil “Cuidado com o fogo” — CIPA Monte Roraima / PMRR.</p>
+  </div>
+</footer>
+</main>
+
+<nav class="nav" aria-label="Seções">
+  <a href="#inicio" data-alvo="inicio"><span aria-hidden="true">🏠</span>Início</a>
+  <a href="#estiagem" data-alvo="estiagem"><span aria-hidden="true">💧</span>Estiagem</a>
+  <a href="#faisca" data-alvo="fogo"><span aria-hidden="true">🔥</span>Fogo</a>
+  <a href="#evitar" data-alvo="prevencao"><span aria-hidden="true">🛡️</span>Prevenção</a>
+  <a href="#quiz" data-alvo="quiz"><span aria-hidden="true">🧠</span>Quiz</a>
+</nav>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-ttl">
+  <div class="sheet-box">
+    <svg class="ic" viewBox="0 0 80 140" aria-hidden="true"><use href="#buriti"/></svg>
+    <h3 id="sheet-ttl">Salvar no celular</h3>
+    <p class="sub" id="sheet-sub"></p>
+    <ol id="passos"></ol>
+    <button class="btn largo" id="fechar" type="button">ENTENDI! 👍</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+  var doc = document.documentElement;
+  doc.classList.add('js');
+  var semMov = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function $(id){ return document.getElementById(id); }
+  function el(tag, cls, html){ var e = document.createElement(tag); if(cls) e.className = cls; if(html != null) e.innerHTML = html; return e; }
+  function guarda(k, v){ try{ localStorage.setItem('fogoRR.'+k, JSON.stringify(v)); }catch(e){} }
+  function le(k){ try{ var v = localStorage.getItem('fogoRR.'+k); return v ? JSON.parse(v) : null; }catch(e){ return null; } }
+  function estrelas(n, tot){ var s=''; for(var i=0;i<tot;i++) s += i<n ? '⭐' : '☆'; return s; }
+
+  /* --- Pequena comemoração (folhas e estrelas) --- */
+  function festa(){
+    if(semMov) return;
+    var fx = el('div','festa'); fx.setAttribute('aria-hidden','true');
+    var itens = ['🌿','⭐','💚','🍃','✨','🌳'];
+    for(var i=0;i<28;i++){
+      var p = el('i'); p.textContent = itens[i % itens.length];
+      p.style.left = (Math.random()*100)+'%'; p.style.fontSize = (18+Math.random()*16)+'px';
+      p.style.setProperty('--dx', ((Math.random()-.5)*120)+'px'); p.style.setProperty('--r', ((Math.random()-.5)*300)+'deg');
+      p.style.animationDelay = (Math.random()*.5)+'s'; p.style.animationDuration = (2+Math.random()*1.4)+'s';
+      fx.appendChild(p);
+    }
+    document.body.appendChild(fx);
+    setTimeout(function(){ fx.remove(); }, 4200);
+  }
+
+  /* --- Aparecer ao rolar --- */
+  var io = null;
+  if('IntersectionObserver' in window && !semMov){
+    io = new IntersectionObserver(function(ents){ ents.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target); } }); },{rootMargin:'0px 0px -8% 0px', threshold:.08});
+    document.querySelectorAll('.rv').forEach(function(r){ io.observe(r); });
+  } else { document.querySelectorAll('.rv').forEach(function(r){ r.classList.add('on'); }); }
+  function revela(e){ if(io) io.observe(e); else e.classList.add('on'); }
+
+  /* --- Progresso + navegação ativa --- */
+  var pf = $('progFill'), ticking = false;
+  function rolagem(){ ticking = false; var max = doc.scrollHeight - innerHeight; pf.style.width = (max > 0 ? Math.min(1, Math.max(0, scrollY/max)) * 100 : 0)+'%'; }
+  addEventListener('scroll', function(){ if(!ticking){ ticking = true; requestAnimationFrame(rolagem); } }, {passive:true});
+  addEventListener('resize', rolagem); rolagem();
+  var navLinks = document.querySelectorAll('.nav a');
+  function marcaNav(alvo){ navLinks.forEach(function(a){ if(a.getAttribute('data-alvo') === alvo) a.setAttribute('aria-current','true'); else a.removeAttribute('aria-current'); }); }
+  marcaNav('inicio');
+  if('IntersectionObserver' in window){
+    var ion = new IntersectionObserver(function(ents){ ents.forEach(function(e){ if(e.isIntersecting) marcaNav(e.target.getAttribute('data-nav')); }); },{rootMargin:'-45% 0px -50% 0px'});
+    document.querySelectorAll('[data-nav]').forEach(function(s){ ion.observe(s); });
+  }
+
+  /* ===================== ESTIAGEM: rio baixando ===================== */
+  var cenaRio = $('cenaRio'), etapas = cenaRio.querySelectorAll('.etapa'), eAtual = 0, tRio = null;
+  var LEG_RIO = ['Com chuva, o rio fica cheio de água.','Na estiagem chove bem pouco, e a água vai baixando…','O rio fica bem baixinho e aparecem praias de areia!'];
+  function rio(i){
+    eAtual = i;
+    cenaRio.classList.remove('rio1','rio2'); if(i) cenaRio.classList.add('rio'+i);
+    etapas.forEach(function(b, k){ b.setAttribute('aria-pressed', k === i ? 'true' : 'false'); });
+    $('legRio').textContent = LEG_RIO[i];
+  }
+  etapas.forEach(function(b){ b.addEventListener('click', function(){ clearTimeout(tRio); rio(+b.getAttribute('data-e')); }); });
+  $('btnRio').addEventListener('click', function(){
+    clearTimeout(tRio); rio(0);
+    tRio = setTimeout(function(){ rio(1); tRio = setTimeout(function(){ rio(2); }, 1700); }, 700);
+  });
+
+  /* ===================== DA FAÍSCA AO INCÊNDIO ===================== */
+  var cenaFogo = $('cenaFogo'), fI = 0, btnFogo = $('btnFogo'), marcas = $('trilhaFogo').querySelectorAll('span');
+  var LEG_FOGO = ['Uma faísca pequena cai no mato…','O mato está muito seco, como um palito de fósforo.','A faísca vira chama bem rápido!','O vento sopra e empurra o fogo…','O fogo se espalha. Uma faísca pequena virou um incêndio enorme!'];
+  function fogo(i){
+    fI = i; cenaFogo.classList.remove('f0','f1','f2','f3','f4'); cenaFogo.classList.add('f'+i);
+    marcas.forEach(function(m, k){ m.classList.toggle('on', k <= i); });
+    $('legFogo').textContent = LEG_FOGO[i];
+    btnFogo.textContent = i < 4 ? '▶ E DEPOIS?' : '🔁 VER DE NOVO';
+  }
+  fogo(0);
+  btnFogo.addEventListener('click', function(){ fogo(fI < 4 ? fI + 1 : 0); });
+
+  /* ===================== O QUE PODE COMEÇAR UM INCÊNDIO ===================== */
+  var CAUSAS = [
+    ['🚬','Bituca de cigarro','Jogada no mato, ela pode ficar acesa e começar um incêndio.'],
+    ['🔥','Fogueira mal apagada','Se não for apagada por completo, ela pode começar um incêndio no mato seco.'],
+    ['🎈','Balão','Ele pode cair aceso em cima do mato seco e começar um incêndio.']
+  ];
+  var boxC = $('listaCausas');
+  CAUSAS.forEach(function(c){
+    var b = el('button','causa rv'); b.type = 'button'; b.setAttribute('aria-expanded','false');
+    b.innerHTML = '<span class="ic" aria-hidden="true">'+c[0]+'</span><b>'+c[1]+'</b><span class="toque">👆 TOQUE PARA DESCOBRIR O PERIGO</span><span class="perigo">⚠️ '+c[2]+'</span>';
+    b.addEventListener('click', function(){ b.setAttribute('aria-expanded', b.getAttribute('aria-expanded') === 'true' ? 'false' : 'true'); });
+    boxC.appendChild(b); revela(b);
+  });
+
+  /* ===================== JOGO: CERTO OU PERIGOSO ===================== */
+  var SITU = [
+    {e:'🚬', t:'Jogar a bituca de cigarro no mato', c:false, x:'Ela pode ficar acesa e incendiar o mato seco.'},
+    {e:'🔥', t:'Apagar a fogueira por completo depois de usar', c:true, x:'Fogueira e churrasco sempre apagados por completo depois.'},
+    {e:'🎈', t:'Soltar balão', c:false, x:'Ele pode cair aceso em cima do mato seco.'},
+    {e:'🗣️', t:'Avisar um adulto ao ver fumaça no mato', c:true, x:'O adulto pode ligar 190 para a Polícia Militar / CIPA.'},
+    {e:'🧯', t:'Tentar apagar um incêndio sozinho', c:false, x:'Esse trabalho é só para profissionais treinados.'},
+    {e:'🗑️', t:'Jogar a bituca de cigarro no lixo', c:true, x:'Bituca vai no lixo, nunca no chão.'},
+    {e:'🌾', t:'Fazer fogueira perto do mato seco', c:false, x:'Fogueira sempre longe do mato seco.'},
+    {e:'👨‍👧', t:'Fazer churrasco sempre com um adulto', c:true, x:'Fogueira e churrasco sempre com um adulto.'}
+  ];
+  var jBox = $('jogoBox'), jI = 0, jOk = 0;
+  function jogoRender(){
+    if(jI >= SITU.length){
+      jBox.innerHTML = '<div class="situ"><div class="emo" aria-hidden="true">🌳</div>'+
+        '<div class="txt" style="min-height:0">Você acertou '+jOk+' de '+SITU.length+'!</div>'+
+        '<div class="estrelas" style="font-size:24px;margin-top:6px" aria-hidden="true">'+estrelas(jOk, SITU.length)+'</div>'+
+        '<p style="font-weight:700;margin-top:10px">'+(jOk >= 6 ? 'Muito bem! Você já sabe como evitar incêndios. 🌿' : 'Cada resposta ensina algo novo. Você está aprendendo muito! 🌱')+'</p>'+
+        '<button type="button" class="btn largo" style="margin-top:16px" id="jDeNovo">🔁 JOGAR DE NOVO</button></div>';
+      festa();
+      $('jDeNovo').addEventListener('click', function(){ jI = 0; jOk = 0; jogoRender(); });
+      return;
+    }
+    var s = SITU[jI];
+    jBox.innerHTML = '<div class="pontos"><span>Situação '+(jI+1)+' de '+SITU.length+'</span><span class="estrelas" aria-label="'+jOk+' estrelas">'+estrelas(jOk, SITU.length)+'</span></div>'+
+      '<div class="situ"><div class="emo" aria-hidden="true">'+s.e+'</div><div class="txt">'+s.t+'</div>'+
+      '<div class="escolha"><button type="button" class="btn" data-r="1"><span aria-hidden="true">✅</span>CUIDADO CERTO</button><button type="button" class="btn alerta" data-r="0"><span aria-hidden="true">⚠️</span>É PERIGOSO</button></div>'+
+      '<div id="jResp"></div></div>';
+    jBox.querySelectorAll('.escolha .btn').forEach(function(bt){
+      bt.addEventListener('click', function(){
+        var certo = (bt.getAttribute('data-r') === '1') === s.c;
+        if(certo) jOk++;
+        jBox.querySelectorAll('.escolha .btn').forEach(function(x){ x.disabled = true; if(x !== bt) x.style.opacity = '.4'; });
+        $('jResp').innerHTML = '<div class="resp '+(certo?'ok':'quase')+'"><b>'+(certo?'✅ MUITO BEM!':'💡 QUASE! VAMOS APRENDER.')+'</b>'+(s.c ? '✅ Cuidado certo. ' : '⚠️ É perigoso. ')+s.x+'</div>'+
+          '<button type="button" class="btn vivo largo" style="margin-top:12px" id="jProx">'+(jI+1 < SITU.length ? 'PRÓXIMA ➜' : 'VER RESULTADO 🏆')+'</button>';
+        jBox.querySelector('.estrelas').textContent = estrelas(jOk, SITU.length);
+        var p = $('jProx'); p.focus({preventScroll:true}); p.addEventListener('click', function(){ jI++; jogoRender(); });
+      });
+    });
+  }
+  jogoRender();
+
+  /* ===================== MISSÃO CONTRA O FOGO ===================== */
+  var MISSOES = [
+    ['🙅','Não brincar com fogo'],
+    ['🎈','Nunca soltar balão'],
+    ['🚬','Não jogar bituca no chão'],
+    ['🔥','Lembrar os adultos de apagar bem fogueiras'],
+    ['🗣️','Avisar um adulto ao ver fumaça'],
+    ['🌿','Cuidar da natureza']
+  ];
+  var feitas = le('missoes') || [], boxM = $('missoes'), medalha = $('medalha');
+  function atualizaMissao(comemora){
+    var n = feitas.filter(Boolean).length, tudo = n === MISSOES.length, antes = medalha.classList.contains('on');
+    $('barraMissao').style.width = (n/MISSOES.length*100)+'%';
+    $('contaMissao').textContent = n + ' de ' + MISSOES.length + ' missões' + (tudo ? ' — completas! 🎉' : '');
+    medalha.classList.toggle('on', tudo);
+    if(tudo && !antes && comemora) festa();
+  }
+  MISSOES.forEach(function(m, i){
+    var b = el('button','missao'); b.type = 'button'; b.setAttribute('aria-pressed', feitas[i] ? 'true' : 'false');
+    b.innerHTML = '<span class="emo" aria-hidden="true">'+m[0]+'</span><span>'+m[1]+'<span class="ok-txt">'+(feitas[i]?'MISSÃO ACEITA!':'')+'</span></span><span class="chk" aria-hidden="true"></span>';
+    b.addEventListener('click', function(){
+      feitas[i] = !feitas[i];
+      b.setAttribute('aria-pressed', feitas[i] ? 'true' : 'false');
+      b.querySelector('.ok-txt').textContent = feitas[i] ? 'MISSÃO ACEITA!' : '';
+      guarda('missoes', feitas); atualizaMissao(true);
+    });
+    boxM.appendChild(b);
+  });
+  atualizaMissao(false);
+
+  /* ===================== QUIZ ===================== */
+  var QUIZ = [
+    {q:'O que é estiagem?', o:[['🌤️','Uma época do ano em que chove bem pouco'],['🎉','Uma festa'],['🌳','Um tipo de árvore']], c:0, x:'Na estiagem, chove bem pouco e o rio fica bem baixinho.'},
+    {q:'Na estiagem chove muito ou pouco?', o:[['💧','Pouco'],['🌧️','Muito']], c:0, x:'As chuvas quase somem nessa época do ano.'},
+    {q:'O que acontece com o mato quando fica muito seco?', o:[['🔥','Fica fácil de pegar fogo'],['💦','Fica mais molhado'],['🙂','Nada muda']], c:0, x:'O mato seco vira um “palito de fósforo”.'},
+    {q:'Quem deve combater incêndios florestais?', o:[['🦺','Profissionais treinados, como os brigadistas'],['🧒','As crianças'],['🙋','Qualquer pessoa sem preparo']], c:0, x:'Esse trabalho é só para profissionais treinados.'},
+    {q:'O que uma criança deve fazer ao ver fumaça ou fogo?', o:[['🗣️','Avisar um adulto'],['🧯','Tentar apagar sozinha'],['🏃','Chegar perto para ver']], c:0, x:'Peça para um adulto ligar 190.'}
+  ];
+  var qBox = $('quizBox'), qProg = $('quizProg'), qI = 0, qOk = 0;
+  QUIZ.forEach(function(){ qProg.appendChild(el('i')); });
+  function progQuiz(){ qProg.querySelectorAll('i').forEach(function(p, i){ p.className = i < qI ? 'feito' : (i === qI ? 'on' : ''); }); }
+  function quizRender(){
+    progQuiz();
+    if(qI >= QUIZ.length){
+      var msg = qOk === QUIZ.length ? 'Acertou tudo! Você é um guardião contra o fogo! 🌿' :
+                qOk >= 3 ? 'Muito bem! Você aprendeu muita coisa! 🌳' :
+                'Você foi até o fim e aprendeu coisas novas. Isso é o mais importante! 🌱';
+      qBox.innerHTML = '<div class="perg quiz-fim"><div class="grande" aria-hidden="true">🎉</div>'+
+        '<h3>MISSÃO CONCLUÍDA!</h3><div class="est" aria-hidden="true">'+estrelas(qOk, QUIZ.length)+'</div>'+
+        '<p style="font-weight:900;font-size:20px;color:var(--g1)">'+qOk+' de '+QUIZ.length+' acertos</p><p style="font-weight:700;margin-top:8px">'+msg+'</p>'+
+        '<button type="button" class="btn largo" style="margin-top:16px" id="qDeNovo">🔁 JOGAR DE NOVO</button></div>';
+      festa();
+      $('qDeNovo').addEventListener('click', function(){ qI = 0; qOk = 0; quizRender(); });
+      return;
+    }
+    var p = QUIZ[qI];
+    qBox.innerHTML = '<div class="perg"><div class="n">PERGUNTA '+(qI+1)+' DE '+QUIZ.length+'</div><h3>'+p.q+'</h3><div class="opcoes'+(p.o.length === 2 ? ' duplo' : '')+'">'+
+      p.o.map(function(o, i){ return '<button type="button" class="opc" data-i="'+i+'"><span class="emo" aria-hidden="true">'+o[0]+'</span><span>'+o[1]+'</span></button>'; }).join('')+
+      '</div><div id="qResp"></div></div>';
+    qBox.querySelectorAll('.opc').forEach(function(bt){
+      bt.addEventListener('click', function(){
+        var i = +bt.getAttribute('data-i'), certo = i === p.c;
+        if(certo) qOk++;
+        qBox.querySelectorAll('.opc').forEach(function(x, k){
+          x.disabled = true;
+          if(k === p.c){ x.classList.add('certa'); x.insertAdjacentHTML('beforeend','<span class="tag">✔ resposta certa</span>'); }
+        });
+        if(!certo){ bt.classList.add('errada'); bt.insertAdjacentHTML('beforeend','<span class="tag">sua escolha</span>'); }
+        $('qResp').innerHTML = '<div class="resp '+(certo?'ok':'quase')+'" style="text-align:center"><b>'+(certo?'✅ MUITO BEM!':'💡 QUASE! VAMOS APRENDER.')+'</b>'+p.x+'</div>'+
+          '<button type="button" class="btn vivo largo" style="margin-top:12px" id="qProx">'+(qI+1 < QUIZ.length ? 'PRÓXIMA PERGUNTA ➜' : 'VER MEU RESULTADO 🏆')+'</button>';
+        var pr = $('qProx'); pr.focus({preventScroll:true}); pr.addEventListener('click', function(){ qI++; quizRender(); });
+      });
+    });
+  }
+  quizRender();
+
+  /* ===================== AVISO + COMPARTILHAR ===================== */
+  var toast = $('toast'), tT;
+  function aviso(txt){ toast.textContent = txt; toast.classList.add('show'); clearTimeout(tT); tT = setTimeout(function(){ toast.classList.remove('show'); }, 2400); }
+  $('share').addEventListener('click', function(){
+    var url = location.href.split('#')[0];
+    var dados = { title:'Cuidado com o Fogo', text:'Uma faísca pode virar um incêndio grande. Aprenda com a CIPA/PMRR a evitar queimadas em Roraima. 🌿', url:url };
+    if(navigator.share){ navigator.share(dados).catch(function(){}); }
+    else if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(url).then(function(){ aviso('Link copiado! 🌿'); }, function(){ aviso('Copie o link da barra de endereços'); });
+    } else { aviso('Copie o link da barra de endereços'); }
+  });
+
+  /* ===================================================================
+     OFFLINE: Service Worker + instalação na tela inicial
+     =================================================================== */
+  var status = document.querySelectorAll('.js-status'), btnsInst = document.querySelectorAll('.js-instalar');
+  var sheet = $('sheet'), passos = $('passos'), sheetTtl = $('sheet-ttl'), sheetSub = $('sheet-sub');
+  var promptInst = null, ultimoFoco = null;
+  var ESSENCIAIS = ['./','./index.html','./manifest.json','./icon-192.png','./icon-512.png','./apple-touch-icon.png'];
+  function mostrarStatus(txt, esperando){ status.forEach(function(s){ s.textContent = txt; s.className = 'status js-status on' + (esperando ? ' esperando' : ''); }); }
+  function textoBotoes(t){ btnsInst.forEach(function(b){ b.textContent = t; }); }
+  function abrirSheet(titulo, sub, itens){
+    sheetTtl.textContent = titulo; sheetSub.textContent = sub;
+    passos.innerHTML = itens.map(function(t, i){ return '<li><b>'+(i+1)+'</b><span>'+t+'</span></li>'; }).join('');
+    ultimoFoco = document.activeElement; sheet.classList.add('show'); $('fechar').focus();
+  }
+  function fecharSheet(){ sheet.classList.remove('show'); if(ultimoFoco && ultimoFoco.focus) ultimoFoco.focus(); }
+  $('fechar').addEventListener('click', fecharSheet);
+  sheet.addEventListener('click', function(e){ if(e.target === sheet) fecharSheet(); });
+  addEventListener('keydown', function(e){ if(e.key === 'Escape' && sheet.classList.contains('show')) fecharSheet(); });
+
+  var ua = navigator.userAgent;
+  var iOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  var standalone = (window.matchMedia && matchMedia('(display-mode: standalone)').matches) || navigator.standalone === true;
+
+  function confereCache(){
+    if(!('caches' in window)) return Promise.resolve(false);
+    return Promise.all(ESSENCIAIS.map(function(u){ return caches.match(new URL(u, location.href).href, {ignoreSearch:true}); }))
+      .then(function(r){ return r.every(Boolean); }).catch(function(){ return false; });
+  }
+  function atualizaOffline(){ confereCache().then(function(ok){ if(ok){ mostrarStatus('✔ DISPONÍVEL OFFLINE NESTE APARELHO'); doc.classList.add('salvo'); } }); }
+
+  if('serviceWorker' in navigator && location.protocol.indexOf('http') === 0){
+    window.addEventListener('load', function(){
+      navigator.serviceWorker.register('./sw.js', { scope: './' }).then(function(){
+        if(!navigator.serviceWorker.controller) mostrarStatus('⏳ Salvando para usar offline…', true);
+        navigator.serviceWorker.ready.then(atualizaOffline);
+        navigator.serviceWorker.addEventListener('controllerchange', atualizaOffline);
+      }).catch(function(){ mostrarStatus('⚠ Não foi possível salvar offline agora', true); });
+    });
+  }
+
+  window.addEventListener('beforeinstallprompt', function(e){ e.preventDefault(); promptInst = e; textoBotoes('📲 INSTALAR NO CELULAR'); });
+  window.addEventListener('appinstalled', function(){ promptInst = null; textoBotoes('✅ INSTALADO NO CELULAR'); mostrarStatus('✔ Instalado na sua tela inicial'); });
+  if(standalone){ textoBotoes('✅ INSTALADO NO CELULAR'); }
+
+  btnsInst.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      if(standalone){ aviso('Já está salvo no seu celular! 🌿'); return; }
+      if(promptInst){
+        var p = promptInst; promptInst = null;
+        Promise.resolve().then(function(){ return p.prompt(); }).then(function(){ return p.userChoice; })
+          .then(function(r){ if(r && r.outcome !== 'accepted') aviso('Você pode instalar depois por aqui 😉'); })
+          .catch(function(){ promptInst = p; });
+        return;
+      }
+      if(iOS){
+        abrirSheet('Salvar no iPhone', 'É fácil! No Safari, faça assim:',
+          ['Toque em <strong>Compartilhar</strong> <span aria-hidden="true">⬆️</span>',
+           'Toque em <strong>“Adicionar à Tela de Início”</strong>',
+           '<strong>Pronto!</strong> 🌿']);
+        return;
+      }
+      abrirSheet('Salvar no celular', 'Use o menu do navegador:',
+        ['Toque no menu <strong>⋮</strong> do navegador',
+         'Escolha <strong>Instalar aplicativo</strong> ou <strong>Adicionar à tela inicial</strong>',
+         '<strong>Pronto!</strong> 🌿']);
+    });
+  });
+})();
+</script>
+</body>
+</html>
